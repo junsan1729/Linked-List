@@ -1,46 +1,34 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        // create dummy node 
-        ListNode* d = new ListNode(0);
-        ListNode* t = d;
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        // create dummy node and tail to siginify end of the linked list 
+        dummy_node = ListNode()
+        tail =  dummy_node
 
-        // till both linked list are not empty
-        // take smaller one and link to that
-        // traverse that linked list 
-        // traverse t pointer 
-        while(l1 && l2){
-            if(l1->val < l2->val){
-                t->next = l1;
-                l1 = l1->next;
-            }
-            else{
-                t->next = l2;
-                l2 = l2->next;
-            }
-            t = t->next;
-        }
+        // while list1 and list2 are non empty 
+        // take smaller one, link tail to it and traverse that linked list and tail also 
+        while list1 is not None and list2 is not None :
+            if list1.val < list2.val:
+                tail.next = list1
+                list1 = list1.next
+            else:
+                tail.next = list2
+                list2 = list2.next
+                
+            tail = tail.next
 
-        // if l1 is non empty, link t to l1
-        if(l1)
-            t->next = l1;
+        // if anyone of the linked list is empty, 
+        // link tail to it 
+        if list2 is not None:
+            tail.next = list2
 
-        if(l2)
+        if list1 is not None:
+            tail.next = list1
 
-        // if l2 is non empty, link t to l2
-            t->next = l2;
-
-        // return the next of d as the head of merged linked list
-        return d->next;            
-    }
-};
+        // return the next of dummy node
+        return dummy_node.next            
+                
